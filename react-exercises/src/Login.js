@@ -46,37 +46,49 @@ export class Login extends React.Component {
         })
     }
 
-    componentDidUpdate() {
-        console.log(this.state)
-      }
+    handleResetButton = (event) => {
+        this.setState({
+            username: "",
+            password: "",
+            remember: false,
+            loginDisabled: true
+        })
+    }
 
   render() {
     return (
-      <div>
-        <input
-          name="username"
-          value={this.state.username}
-          onChange={this.handleInputChange}
-        ></input>
-        <input
-          name="password"
-          type="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-        ></input>
-        <input
-          name="remember"
-          type="checkbox"
-          checked={this.state.remember}
-          onChange={this.handleCheckboxChange}
-        ></input>
-        <button
-        name="login"
-        type="button"
-        disabled={this.state.loginDisabled}
-        onChange={this.handleInputChange}
-        onClick={this.onLogin}>Login</button>
-      </div>
+      <><div>
+            <input
+                name="username"
+                value={this.state.username}
+                onChange={this.handleInputChange}
+            ></input>
+            <input
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+            ></input>
+            <input
+                name="remember"
+                type="checkbox"
+                checked={this.state.remember}
+                onChange={this.handleCheckboxChange}
+            ></input>
+        </div><div>
+                <button
+                    name="login"
+                    type="button"
+                    disabled={this.state.loginDisabled}
+                    onChange={this.handleInputChange}
+                    onClick={this.onLogin}>Login</button>
+                    <button
+                    name="Reset"
+                    type="button"
+                    disabled={this.state.loginDisabled}
+                    onChange={this.handleInputChange}
+                    onClick={this.handleResetButton}>Reset</button>
+            </div></>
     );
   }
 }
