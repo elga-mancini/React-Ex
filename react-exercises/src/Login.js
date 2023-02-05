@@ -5,14 +5,18 @@ export class Login extends React.Component {
     username: "",
     password: "",
     remember: false,
+    loginDisabled: true,
   };
 
   handleInputChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
+    const disabled = event.target.disabled;
+    const type = event.target.type;
 
     this.setState({
-      [name]: value,
+      [name]: type === "button" ? disabled : value,
+      loginDisabled: value === "" ? true : false
     });
   };
 
@@ -24,6 +28,27 @@ export class Login extends React.Component {
       [name]: checked,
     });
   };
+
+  handleLoginButtonChange = (event) => {
+    const disabled = event.target.disabled;
+    const name = event.target.name;
+
+    this.setState({
+        [name]: disabled,
+      });
+    };
+
+    onLogin = (event) => {
+        this.setState({
+            username: this.state.username,
+            password: this.state.password,
+            remember: this.state.remember
+        })
+    }
+
+    componentDidUpdate() {
+        console.log(this.state)
+      }
 
   render() {
     return (
@@ -45,6 +70,12 @@ export class Login extends React.Component {
           checked={this.state.remember}
           onChange={this.handleCheckboxChange}
         ></input>
+        <button
+        name="login"
+        type="button"
+        disabled={this.state.loginDisabled}
+        onChange={this.handleInputChange}
+        onClick={this.onLogin}>Login</button>
       </div>
     );
   }
